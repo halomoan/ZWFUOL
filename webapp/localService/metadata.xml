@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZSAPWFUOL_SRV" xml:lang="zh" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="InitiatorGroup" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Grouplvlid"/>
+                    <PropertyRef Name="Useragent"/>
+                    <PropertyRef Name="Validfrom"/>
+                </Key>
+                <Property Name="Grouplvlid" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Group Approver" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Useragent" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="用户" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validfrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validto" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ApproverGroup" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Grouplvlid"/>
+                    <PropertyRef Name="Useragent"/>
+                    <PropertyRef Name="Validfrom"/>
+                </Key>
+                <Property Name="Grouplvlid" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Group Approver" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Useragent" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="用户" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validfrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validto" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="AgentRule" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="WfGuid"/>
+                    <PropertyRef Name="Validfrom"/>
+                    <PropertyRef Name="Ruleorder"/>
+                </Key>
+                <Property Name="WfGuid" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Workflow GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validfrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ruleorder" Type="Edm.Byte" Nullable="false" sap:unicode="false" sap:label="Rule Order" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Validto" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Opt" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="选项" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value1" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="2" sap:unicode="false" sap:label="参数文件值" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value2" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="2" sap:unicode="false" sap:label="参数文件值" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Initiatorgrp" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Group Inititator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="L1approvergrp" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Group Approver Lvl1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="L2approvergrp" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Group Approver Lvl2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="L3approvergrp" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Group Approver Lvl3" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="L1approverrole" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="角色" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="L2approverrole" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="角色" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="L3approverrole" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="角色" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Enabled" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Enabled" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="WFRegister" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Wfguid"/>
+                    <PropertyRef Name="Tblname"/>
+                </Key>
+                <Property Name="Wfguid" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Workflow GUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tblname" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Table Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wfname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Workflow Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Totalfield" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Total Field In Table" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZSAPWFUOL_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="InitiatorGroupSet" EntityType="ZSAPWFUOL_SRV.InitiatorGroup" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ApproverGroupSet" EntityType="ZSAPWFUOL_SRV.ApproverGroup" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="AgentRuleSet" EntityType="ZSAPWFUOL_SRV.AgentRule" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="WFRegisterSet" EntityType="ZSAPWFUOL_SRV.WFRegister" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="https://10.130.16.8:8443/sap/opu/odata/sap/ZSAPWFUOL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://10.130.16.8:8443/sap/opu/odata/sap/ZSAPWFUOL_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

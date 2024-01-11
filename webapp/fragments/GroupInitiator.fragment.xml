@@ -1,0 +1,12 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+		id="groupinitiator"
+		title="{i18n>Label.ManageInitiatorGroup}"		
+	>
+		<content>
+        </content>
+</Dialog>
+</c:FragmentDefinition>

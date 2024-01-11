@@ -1,0 +1,78 @@
+<mvc:View
+    controllerName="zwfuol.pages.controller.Homepage"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <VBox alignItems="Center">
+                <Title
+                    text="{viewData>/PropertyName}"
+                    titleStyle="H1"
+                />
+                <HBox
+                    justifyContent="Center"
+                    renderType="Bare"
+                    height="100%"
+                >
+                    <Panel
+                        width="75%"
+                        height="100%"
+                    >
+                        <Carousel
+                            id="Property"
+                            class="sapUiContentPadding"
+                            height="50%"
+                            pages="{
+                                path: '/PropertySet',
+                                events: {
+                                    dataRequested: '.onDataRequested',
+                                    dataReceived: '.onDataReceived',
+                                    change: '.onDataChange'
+                                }
+                            }"
+                            pageChanged="onPageChanged"
+                        >
+                            <Image
+                                src="{ImgUrl}"
+                                tooltip="{Name}"
+                                height="508px"
+                            />
+                        </Carousel>
+                    </Panel>
+                </HBox>
+                <HBox
+                    justifyContent="SpaceBetween"
+                    alignContent="End"
+                    alignItems="End"
+                    width="220px"
+                >
+                    <Select
+                        id="ContractType"
+                        class="sapUiSmallMarginTop"
+                        selectedKey="L002"
+                    >
+                        <core:ListItem
+                            key="L002"
+                            text="{i18n>Label.Retail}"
+                        />
+                        <core:ListItem
+                            key="L001"
+                            text="{i18n>Label.Office}"
+                        />
+                    </Select>
+                    <Button
+                        text="{i18n>Label.Start}"
+                        press="onStart"
+                        width="80px"
+                    />
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

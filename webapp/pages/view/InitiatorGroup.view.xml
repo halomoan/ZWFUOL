@@ -1,0 +1,128 @@
+<mvc:View
+	controllerName="zwfuol.pages.controller.InitiatorGroup"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.ui.layout.form"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+	<l:VerticalLayout class="sapUiContentPadding">
+		<f:Form
+			id="FormChange354"
+			editable="true"
+		>
+            <f:toolbar>
+				<Toolbar>
+					<Title text="{i18n>Label.InitiatorGroup}"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://cancel" press="onClear"/>
+					<Button icon="sap-icon://add" press="onAdd"/>
+				</Toolbar>
+			</f:toolbar>
+			<f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false"
+				/>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement label="{i18n>Label.GroupID}">
+							<f:fields>
+								<Input
+									value="{form>/Groupid}"
+									id="name"
+                                    maxLength="12"
+								/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>Label.GroupName}">
+							<f:fields>
+								<Input value="{form>/Groupname}" maxLength="40"/>
+							</f:fields>
+						</f:FormElement>						
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+		<t:Table
+			id="initiatortbl"
+			rows="{
+				path: '/InitGroupSet',
+				sorter: {
+					path: 'Groupid'
+				}
+			}"
+			selectionMode="MultiToggle"
+			visibleRowCount="7"
+			paste="onPaste"
+			ariaLabelledBy="title"
+			rowSelectionChange="onTableSelectionChanged"
+		>
+			<t:extension>
+				<OverflowToolbar style="Clear">
+					<Title
+						id="title"
+						text="{i18n>Label.InitiatorGroup}"
+					/>
+					<ToolbarSpacer/>
+					<Button
+						icon="sap-icon://save"
+						textDirection="Inherit"
+						type="Default"
+						press="onSave"
+						visible="{viewData>/showSave}"
+					/>
+					<Button
+						icon="sap-icon://delete"
+						textDirection="Inherit"
+						type="Default"
+						press="onDelete"
+						visible="{viewData>/showDelete}"
+					/>					
+				</OverflowToolbar>
+			</t:extension>
+			<t:columns>
+				<t:Column
+					width="10rem"
+					filterProperty="Groupid"
+				>
+					<Label text="{i18n>Label.GroupID}"/>
+					<t:template>
+						<Label
+							text="{Groupid}"
+							wrapping="false"
+						/>
+					</t:template>
+				</t:Column>
+				<t:Column
+					width="10rem"
+					filterProperty="Groupname"
+				>
+					<Label text="{i18n>Label.GroupName}"/>
+					<t:template>
+						<Label text="{
+							path: 'Groupname'
+						}"/>
+					</t:template>
+				</t:Column>
+			</t:columns>
+		</t:Table>
+	</l:VerticalLayout>
+</mvc:View>
