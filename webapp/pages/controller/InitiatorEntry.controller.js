@@ -18,7 +18,9 @@ sap.ui.define([
 		 * @override
 		 */
 		onInit: function() {
-			var oViewModel = new JSONModel({			
+			var oViewModel = new JSONModel({
+				"showSave": false,
+				"showDelete": false		
 			});
 	
 			var oView = this.getView();

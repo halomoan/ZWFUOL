@@ -22,7 +22,8 @@
         "settings": {
           "annotations": [],
           "localUri": "localService/metadata.xml",
-          "odataVersion": "2.0"
+          "odataVersion": "2.0",
+          "useBatch": true          
         }
       }
     }
@@ -43,7 +44,7 @@
       "phone": true
     }
   },
-  "sap.ui5": {
+  "sap.ui5": {    
     "flexEnabled": true,
     "dependencies": {
       "minUI5Version": "1.120.4",

@@ -1,6 +1,6 @@
 specVersion: "3.1"
 metadata:
-  name: zwfuol.zwfuol
+  name: zwfuol
 type: application
 server:
   customMiddleware:
@@ -25,5 +25,5 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: zwfuol.zwfuol
+        component: zwfuol
         ui5Theme: sap_horizon
