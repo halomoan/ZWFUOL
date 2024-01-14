@@ -97,7 +97,7 @@
         {
           "name": "RouteMainView",
           "pattern": ":?query:",
-          "target": ["InitiatorGroupView"]
+          "target": ["InitiatorEntryView"]
         }
       ],
       "targets": {

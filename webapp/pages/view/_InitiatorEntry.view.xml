@@ -10,27 +10,32 @@
 	height="100%"
 	busyIndicatorDelay="0"
 >
-<Page>
-
 	<l:VerticalLayout class="sapUiContentPadding">
 		<t:Table
 			id="initiatortbl"
 			rows="{
-				path: '/InitiatorGroupSet',
+				path: 'tblData>/InitiatorGroup',
 				sorter: {
 					path: 'Groupid'
+				},
+				filters : {
+					path : 'xStatus/isDeleted',
+					operator : 'EQ',
+					value1 : false
 				}
-			}"			
+			}"
+			selectionMode="MultiToggle"
 			visibleRowCount="7"
 			
 			ariaLabelledBy="title"			
 		>
 		<t:dependents>
 			<plugins:MultiSelectionPlugin
-			enableNotification="true"
-			showHeaderSelector="true"
-			selectionMode="MultiToggle"
-			selectionChange="onSelectionChange"/>
+				limit="{path: 'config>/limit', type: 'sap.ui.model.type.Integer'}"
+				enableNotification="true"
+				showHeaderSelector="{config>/showHeaderSelector}"
+				selectionMode="{config>/selectionMode}"
+				selectionChange="onSelectionChange"/>
 		</t:dependents>
 
 			<t:extension>
@@ -77,7 +82,7 @@
 					<t:template>
 						<Select
 							forceSelection="false"
-							selectedKey="{Groupid}"
+							selectedKey="{tblData>Groupid}"
 							items="{
 								path: '/InitGroupSet',
 								sorter: {
@@ -101,7 +106,7 @@
 					<t:template>
 						<Select
 							forceSelection="false"
-							selectedKey="{Function}"
+							selectedKey="{tblData>Function}"
 							items="{
 								path: '/ZFunctionSet',
 								sorter: {
@@ -131,7 +136,7 @@
 								suspended: true
 							}"
 							suggest=".onDepartmentInputSuggest"
-							value="{Department}"
+							value="{tblData>Department}"
 							change="onChanged"
 						>
 							<suggestionItems>
@@ -140,7 +145,7 @@
 						</Input>
 					</t:template>
 				</t:Column>
-				<!-- <t:Column
+				<t:Column
 					width="10rem"
 					filterProperty="Useragent"
 				>
@@ -152,7 +157,7 @@
 							showSuggestion="true"
 							showTableSuggestionValueHelp="false"
 							suggestionRows="{/UserVHSet}"
-							value="{Useragent}"
+							value="{tblData>Useragent}"
 							change="onChanged"
 						>
 							<suggestionColumns>
@@ -201,14 +206,28 @@
 									<Label text="{Department}" />
 								</ColumnListItem>
 							</suggestionRows>
-						</Input>						
+						</Input>
+						<!-- <Input
+							placeholder="{i18n>Select.InitiatorGroup}"
+							maxLength="12"
+							showSuggestion="true"
+							suggestionItems=""
+							value="{tblData>Useragent}"
+						>
+							<suggestionItems>
+								<c:ListItem
+									text="{Bname}"
+									additionalText="{Department}"
+								/>
+							</suggestionItems>
+						</Input> -->
 					</t:template>
-				</t:Column> -->
+				</t:Column>
 				<t:Column width="10rem">
 					<Label text="{i18n>Label.ValidFrom}" />
 					<t:template>
 						<DatePicker value="{
-							path: 'Validfrom',
+							path: 'tblData>Validfrom',
 							type: 'sap.ui.model.type.Date',
 							formatOptions: {
 								pattern: 'yyyy-MM-dd'
@@ -226,7 +245,7 @@
 					<Label text="{i18n>Label.ValidTo}" />
 					<t:template>
 						<DatePicker value="{
-							path: 'Validto',
+							path: 'tblData>Validto',
 							type: 'sap.ui.model.type.Date',
 							formatOptions: {
 								pattern: 'yyyy-MM-dd'
@@ -239,17 +258,4 @@
 			</t:columns>
 		</t:Table>
 	</l:VerticalLayout>
-	<footer>
-		<Toolbar id="footer">
-			<Button
-				id="messagePopoverBtn"
-				icon="sap-icon://alert"
-				text="{= ${message>/}.length }"
-				visible="{= ${message>/}.length > 0 }"
-				type="Emphasized"
-				press="onMessagePopoverPress"
-			/>
-		</Toolbar>
-	</footer>
-</Page>
 </mvc:View>
