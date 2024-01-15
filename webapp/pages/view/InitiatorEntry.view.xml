@@ -82,7 +82,8 @@
 								path: '/InitGroupSet',
 								sorter: {
 									path: 'Groupid'
-								}
+								},
+								templateShareable:true
 							}"
 							change="onChanged"
 						>
@@ -106,7 +107,8 @@
 								path: '/ZFunctionSet',
 								sorter: {
 									path: 'Id'
-								}
+								},
+								templateShareable:true
 							}"
 							change="onChanged"
 						>
@@ -128,7 +130,8 @@
 							showSuggestion="true"
 							suggestionItems="{
 								path: '/ZDepartmentSet',
-								suspended: true
+								suspended: true,
+								templateShareable:true
 							}"
 							suggest=".onDepartmentInputSuggest"
 							value="{Department}"

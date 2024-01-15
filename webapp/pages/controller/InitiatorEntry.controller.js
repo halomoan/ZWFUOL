@@ -93,8 +93,7 @@ sap.ui.define(
 
       __onRouteMatched: function (oEvent) {
         _oi18Bundle = this.getResourceBundle();
-        _oParams = oEvent.getParameter("arguments");
-        this._getTableData();
+        _oParams = oEvent.getParameter("arguments");        
       },
       onAdd: function () {
         var oData = {
@@ -122,6 +121,27 @@ sap.ui.define(
             groupId: "groupBatchId"
           });
         }
+      },
+
+      onSave: function() {
+        this._oMessageManager.removeAllMessages();
+
+        var oSAPModel = this.getView().getModel();
+        //oSAPModel.setDeferredGroups(["groupBatchId"]);  
+        
+        console.log(oSAPModel.hasPendingChanges())
+        if (oSAPModel.hasPendingChanges()) {
+          oSAPModel.submitChanges({
+            success: function (oData,oResponse) {                          
+              console.log(oResponse)        
+            },
+            error: function (oError) { 
+              console.log(oError)        
+            },
+            //groupId: "groupBatchId"
+          });
+        }
+
       },
       onDelete: function () {
         var oTable = _oTableManager.getTableControl();
@@ -200,51 +220,27 @@ sap.ui.define(
           sSubPath = oSource.getBinding("value").getPath();
         }
         
-        sPath = sPath + "/" + sSubPath;
+        sSubPath = sPath + "/" + sSubPath;
 
         if (sCtrlType === "sap.m.DatePicker"){
-          oSAPModel.setProperty(sPath, new Date(sValue));
+          oSAPModel.setProperty(sSubPath, new Date(sValue));
         } else {
-          oSAPModel.setProperty(sPath, sValue);
+          oSAPModel.setProperty(sSubPath, sValue);
         }
+
+        //console.log(oSAPModel.getProperty(sPath),oSAPModel.getProperty(sSubPath))
 
         var oViewModel = this.getView().getModel("viewData");
         oViewModel.setProperty("/showSave", oSAPModel.hasPendingChanges());
       },
 
-      onManageGroup: function () {},
-      _getTableData: function () {
-        var aFilters = [];
-        var oModel = this.getView().getModel();
-        var oTable = _oTableManager.getTableControl();
-        oTable.setBusy(true);
 
-        oModel.read("/InitiatorGroupSet", {
-          filters: aFilters,
-          success: function (oResponse) {
-            if (oResponse.results) {
-              var aData = oResponse.results;
-
-              var oTableModel = new JSONModel({
-                InitiatorGroup: aData,
-              });
-
-              _oTableManager.setTableModel(oTableModel);
-
-              oTable.setBusy(false);
-
-              this.getView().setModel(oTableModel, "tblData");
-            }
-          }.bind(this),
-          error: function (oError) {
-            oTable.setBusy(false);
-            MessageBox.error("{i18n>Error.FailLoad}");
-          },
-        });
-      },
+      onManageGroup: function () {},      
       onMessagePopoverPress: function (oEvent) {
         _oMessagePopover.toggle(oEvent.getSource());
       },
+
+	
     });
   }
 );
