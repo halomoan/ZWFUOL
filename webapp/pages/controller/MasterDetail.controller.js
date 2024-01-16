@@ -34,37 +34,18 @@ sap.ui.define([
                     sTarget = oItem.getTarget();               
                     
                 switch(sTarget){
-                    case "G001:RECNPLAN":			
-                        if (_oParams) {
-                            this._oRouter.navTo("FloorUnitPlanner",_oParams); 
-                        } else {
-                            this._oRouter.navTo("NotFound");
-                        }
+                    case "SAPG1:WFINITRGRP":			
+                        this._oRouter.navTo("InitiatorGroup",_oParams); 
                         break;
-                    case "G001:VACANTUNITS":	        
-                        if (_oParams) {
-                            
-                            this._oRouter.navTo("ManageVacantUnit",_oParams);
-                        } else {
-                            this._oRouter.navTo("NotFound");
-                        }
-                        break;    
-                    case "G001:LEASECOMM":	        
-                        if (_oParams) {
-                            
-                            this._oRouter.navTo("LeaseCommission",_oParams);
-                        } else {
-                            this._oRouter.navTo("NotFound");
-                        }
-                        break;           		
-                    case "G002:CFMONTHLY":	
-                        if (_oParams) {
-                            this._oRouter.navTo("UnitsPlannerBase",_oParams);                                                        
-                        } else {
-                            this._oRouter.navTo("NotFound");
-                        }
-                    case "SAPG1:PLANT":			
-                        this._oRouter.navTo("planttopurchorg"); break;
+                    case "SAPG1:WFINITRPASSG":
+                        this._oRouter.navTo("InitiatorEntry",_oParams);
+                        break;
+                    case "SAPG1:WFAPPRGRP":
+                        this._oRouter.navTo("ApproverGroup",_oParams);
+                        break;
+                    case "SAPG1:WFAPPRGRPASSG":
+                        this._oRouter.navTo("ApproverEntry",_oParams);
+                        break;                   
                     default:
                         this._oRouter.navTo("NotFound");break;
                 }

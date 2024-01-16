@@ -32,7 +32,7 @@
 					<OverflowToolbar style="Clear">
 						<Title
 							id="title"
-							text="{i18n>Label.RegisterInitiator}"
+							text="{i18n>Label.RegisterApprover}"
 						/>
 						<ToolbarSpacer/>						
 						<Button
@@ -67,8 +67,9 @@
 						<Input
 							placeholder="{i18n>Select.ApproverGroup}"
 							showSuggestion="true"
-							suggestionItems="{/ApprGroupSet}"
+							suggestionItems="{path:'/ApprGroupSet',templateShareable:true}"
 							value="{Groupid}"
+							change="onChanged"
 						>
 							<suggestionItems>
 								<c:ListItem
@@ -90,7 +91,7 @@
 							placeholder="{i18n>Select.UserID}"
 							showSuggestion="true"
 							showTableSuggestionValueHelp="false"
-							suggestionRows="{/UserVHSet}"
+							suggestionRows="{path:'/UserVHSet',templateShareable:true}"
 							value="{Useragent}"
 							change="onChanged"
 						>

@@ -98,6 +98,26 @@
           "name": "RouteMainView",
           "pattern": ":?query:",
           "target": ["ApproverEntryView"]
+        },
+        {
+          "name": "InitiatorGroup",
+          "pattern": "InitiatorGroup",
+          "target": ["InitiatorGroupView"]
+        },
+        {
+          "name": "InitiatorEntry",
+          "pattern": "InitiatorEntry",
+          "target": ["InitiatorEntryView"]
+        },
+        {
+          "name": "ApproverGroup",
+          "pattern": "ApproverGroup",
+          "target": ["ApproverGroupView"]
+        },
+        {
+          "name": "ApproverEntry",
+          "pattern": "ApproverEntry",
+          "target": ["ApproverEntryView"]
         }
       ],
       "targets": {

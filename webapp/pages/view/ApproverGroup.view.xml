@@ -19,7 +19,7 @@
 			>
 				<f:toolbar>
 					<Toolbar>
-						<Title text="{i18n>Label.NewGroup}" />
+						<Title text="{i18n>New.ApproverGroup}" />
 						<ToolbarSpacer />
 						<Button
 							icon="sap-icon://cancel"
@@ -89,7 +89,7 @@
 						path: 'Groupid'
 					}
 				}"
-				visibleRowCount="7"
+				visibleRowCount="16"
 				paste="onPaste"
 				ariaLabelledBy="title"
 				rowSelectionChange="onTableSelectionChanged"

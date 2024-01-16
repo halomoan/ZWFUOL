@@ -1,0 +1,24 @@
+<mvc:View
+	controllerName="zwfuol.pages.controller.Homepage"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	height="100%">
+	<l:ResponsiveSplitter>
+		<l:PaneContainer orientation="Vertical">
+			<l:SplitPane>
+				<l:layoutData>
+					<l:SplitterLayoutData size="100%" />
+				</l:layoutData>
+				<IllustratedMessage enableVerticalResponsiveness="true" illustrationType="sapIllus-NoActivities">
+					<additionalContent>
+						<Button text="Go Back" press="onNavBack" />
+					</additionalContent>
+				</IllustratedMessage>
+			</l:SplitPane>
+			<l:SplitPane>
+				<VBox />
+			</l:SplitPane>
+		</l:PaneContainer>
+	</l:ResponsiveSplitter>
+</mvc:View>
