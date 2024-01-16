@@ -1,0 +1,24 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+	<SelectDialog
+		id="seldepartment"
+		noDataText="{i18n>Label.NoDataFound}"
+		title="{i18n>Select.Department}"
+		search=".onSearchDepartment"
+		confirm=".onDepartmentDialogClose"
+		cancel=".onDepartmentDialogClose"
+		items="{
+			path: '/ZDepartmentSet',
+			templateShareable:true
+		}">
+		<StandardListItem
+			title="{Department}"
+			description=""
+			icon=""
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" />
+	</SelectDialog>
+</c:FragmentDefinition>

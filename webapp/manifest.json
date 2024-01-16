@@ -97,7 +97,7 @@
         {
           "name": "RouteMainView",
           "pattern": ":?query:",
-          "target": ["InitiatorEntryView"]
+          "target": ["ApproverEntryView"]
         }
       ],
       "targets": {
@@ -138,6 +138,20 @@
           "transition": "slide",
           "viewId": "InitiatorGroup",
           "viewName": "InitiatorGroup"
+        },
+        "ApproverGroupView": {
+          "parent": "MasterDetail",
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "ApproverGroup",
+          "viewName": "ApproverGroup"
+        },
+        "ApproverEntryView": {
+          "parent": "MasterDetail",
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "ApproverEntry",
+          "viewName": "ApproverEntry"
         }
       }
     },

@@ -1,7 +1,6 @@
 sap.ui.define(
   [
-    "zwfuol/controller/BaseController",
-    "zwfuol/controller/InitiatorEntryMgr",
+    "zwfuol/controller/BaseController",    
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
@@ -14,8 +13,7 @@ sap.ui.define(
     "sap/ui/core/library",
   ],
   function (
-    BaseController,
-    InitiatorEntryMgr,
+    BaseController,    
     JSONModel,
     Filter,
     FilterOperator,
@@ -31,12 +29,18 @@ sap.ui.define(
 
     var _oi18Bundle;
     var _oParams;
-    var _oTableManager;
+    var _oTableControl;
     var _oTableIndices;
     var _MessageType = library.MessageType;
     var _oMessagePopover;
+    var _oDepartmentDialog;
+    var _sPath;
+    var _DeptFilters = [];
 
     return BaseController.extend("zwfuol.pages.controller.InitiatorEntry", {
+      _formFragments: {},
+   
+
       /**
        * @override
        */
@@ -82,8 +86,7 @@ sap.ui.define(
         this._oMessageManager.registerObject(oView, true);
         oView.setModel(this._oMessageManager.getMessageModel(), "message");
 
-        var oTable = this.byId("initiatortbl");
-        _oTableManager = new InitiatorEntryMgr(oTable);
+        _oTableControl = this.byId("initiatortbl");
 
         this._oRouter = this.getRouter();
         this._oRouter
@@ -93,104 +96,73 @@ sap.ui.define(
 
       __onRouteMatched: function (oEvent) {
         _oi18Bundle = this.getResourceBundle();
-        _oParams = oEvent.getParameter("arguments");        
+        _oParams = oEvent.getParameter("arguments");
       },
       onAdd: function () {
         var oData = {
           Groupid: "",
           Function: "",
-          Department: "",          
+          Department: "",
           Validfrom: new Date(),
-          Validto: new Date("9999-12-31")          
+          Validto: new Date("9999-12-31"),
         };
 
         this._oMessageManager.removeAllMessages();
 
         var oSAPModel = this.getView().getModel();
-        
+
         oSAPModel.setDeferredGroups(["groupBatchId"]);
         oSAPModel.createEntry("/InitiatorGroupSet", {
-          properties: oData
+          properties: oData,
         });
-        if (oSAPModel.hasPendingChanges()) {          
+        if (oSAPModel.hasPendingChanges()) {
           oSAPModel.submitChanges({
-            success: function (oResponse) {                          
-            },
-            error: function (oError) {             
-            },
-            groupId: "groupBatchId"
+            success: function (oResponse) {},
+            error: function (oError) {},
+            groupId: "groupBatchId",
           });
         }
       },
 
-      onSave: function() {
+      onSave: function () {
+        var oThis = this;
         this._oMessageManager.removeAllMessages();
 
         var oSAPModel = this.getView().getModel();
-        //oSAPModel.setDeferredGroups(["groupBatchId"]);  
-        
-        console.log(oSAPModel.hasPendingChanges())
+        //oSAPModel.setDeferredGroups(["groupBatchId"]);
+
+        //console.log(oSAPModel.hasPendingChanges());
+
         if (oSAPModel.hasPendingChanges()) {
           oSAPModel.submitChanges({
-            success: function (oData,oResponse) {                          
-              console.log(oResponse)        
+            success: function (oData, oResponse) {
+              MessageToast.show(_oi18Bundle.getText("Success.Saved", ["Data"]));
+              oThis._dirtyShowSave();
             },
-            error: function (oError) { 
-              console.log(oError)        
+            error: function (oError) {
+              //console.log(oError);
             },
             //groupId: "groupBatchId"
           });
+        } else {
+          oThis._dirtyShowSave();
         }
-
       },
       onDelete: function () {
-        var oTable = _oTableManager.getTableControl();
-        //var aIndices = oTable.getSelectedIndices();
+        var oSAPModel = this.getView().getModel();
+        this._oMessageManager.removeAllMessages();
 
-        console.log(oTable)
-        return;
-        var sMsg;
-        if (aIndices.length < 1) {
-          sMsg = "no item selected";
-        } else {
-          sMsg = aIndices;
-        }
-        MessageToast.show(sMsg);
-      },
+        for (var i = 0; i < _oTableIndices.length; i++) {
+          var sPath = _oTableControl
+            .getContextByIndex(_oTableIndices[i])
+            .getPath();
 
-      onDepartmentInputSuggest: function (oEvent) {
-        var oSource = oEvent.getSource();
-        var oData = oSource.getBindingContext().getObject();
-        var sPath = oSource.getBindingContext().getPath();
-        var oSAPModel = oSource.getBindingContext().getModel();
-
-        console.log(oSAPModel)
-        //console.log(oSAPModel.getProperty(sPath+"/Function"));
-
-
-        var oBinding = oEvent.getSource().getBinding("suggestionItems");
-
-        console.log(oData);
-        if (oData.Function) {
-          oSource.setValueState("None");
-          oSource.setValueStateText("");
-
-          var aFilters = [];
-          aFilters.push(
-            new Filter("Function", FilterOperator.EQ, oData.Function)
-          );
-          oBinding.filter(aFilters);
-        } else {
-          oSource.setValue("");
-          oSource.setValueState("Error");
-          oSource.setValueStateText(_oi18Bundle.getText("Error.PropertyEmpty"));
-        }
-
-        if (oBinding.isSuspended()) {
-          oBinding.resume();
+          oSAPModel.remove(sPath, {
+            success: function (oData, oResponse) {},
+            error: function (oError) {},
+          });
         }
       },
-
       onSelectionChange: function (oEvent) {
         var oPlugin = oEvent.getSource();
         _oTableIndices = oPlugin.getSelectedIndices();
@@ -204,43 +176,96 @@ sap.ui.define(
         var sCtrlType = oSource.getMetadata().getName();
 
         var aParams = oEvent.getParameters();
-                
+
         var sValue = aParams.newValue;
-        if (!sValue){
-          sValue = aParams.selectedItem.getKey();          
-        }        
+        if (!sValue) {
+          sValue = aParams.selectedItem.getKey();
+        }
 
         var oSAPModel = oSource.getBindingContext().getModel();
 
         var sPath = oSource.getBindingContext().getPath();
-        if (oSource.getBinding("selectedKey")){
+        if (oSource.getBinding("selectedKey")) {
           var sSubPath = oSource.getBinding("selectedKey").getPath();
-          
         } else {
           sSubPath = oSource.getBinding("value").getPath();
         }
-        
+
         sSubPath = sPath + "/" + sSubPath;
 
-        if (sCtrlType === "sap.m.DatePicker"){
+        if (sCtrlType === "sap.m.DatePicker") {
           oSAPModel.setProperty(sSubPath, new Date(sValue));
         } else {
           oSAPModel.setProperty(sSubPath, sValue);
         }
-
-        //console.log(oSAPModel.getProperty(sPath),oSAPModel.getProperty(sSubPath))
-
-        var oViewModel = this.getView().getModel("viewData");
-        oViewModel.setProperty("/showSave", oSAPModel.hasPendingChanges());
+        this._dirtyShowSave();
       },
 
-
-      onManageGroup: function () {},      
+      onManageGroup: function () {},
       onMessagePopoverPress: function (oEvent) {
         _oMessagePopover.toggle(oEvent.getSource());
       },
 
-	
+      onVHDepartment: function (oEvent) {
+        var oView = this.getView();
+        var oSource = oEvent.getSource();
+        var oData = oSource.getBindingContext().getObject();
+        _sPath = oSource.getBindingContext().getPath();
+
+        if (_oDepartmentDialog) {
+          _oDepartmentDialog.open();
+        } else {
+          _oDepartmentDialog = this.showFormDialogFragment(
+            this.getView(),
+            this._formFragments,
+            "zwfuol.fragments.DepartmentSelect",
+            this
+          );
+        }
+        _oDepartmentDialog.setDraggable(true);
+
+        var oList = sap.ui.core.Fragment.byId(oView.getId(), "seldepartment");
+        var oBinding = oList.getBinding("items");
+
+        _DeptFilters = [];
+        _DeptFilters.push(
+          new Filter("Function", FilterOperator.EQ, oData.Function)
+        );
+        oBinding.filter(_DeptFilters);
+      },
+
+      onSearchDepartment: function (oEvent) {
+        var sValue = oEvent.getParameter("value");
+        var oFilter = new Filter("Department", FilterOperator.Contains, sValue);
+        var oBinding = oEvent.getParameter("itemsBinding");
+
+        var aFilters = [];
+        for (var i = 0; i < _DeptFilters.length; i++) {
+          aFilters.push(_DeptFilters[i]);
+        }
+        aFilters.push(oFilter);
+        oBinding.filter(aFilters);
+      },
+      onDepartmentDialogClose: function (oEvent) {
+        var oThis = this;
+        var aContexts = oEvent.getParameter("selectedContexts");
+        if (aContexts && aContexts.length) {
+          aContexts.map(function (oContext) {
+            var oData = oContext.getObject();
+            var oSAPModel = oContext.getModel();
+            oSAPModel.setProperty(_sPath + "/Department", oData.Department);
+            oThis._dirtyShowSave();
+          });
+        }
+      },
+      _dirtyShowSave: function () {
+        var oViewModel = this.getView().getModel("viewData");
+        var oSAPModel = this.getView().getModel();
+        var bChanged = oSAPModel.hasPendingChanges();
+        if (bChanged)
+          oViewModel.setProperty("/showSave", oSAPModel.hasPendingChanges());
+        else oViewModel.setProperty("/showSave", oSAPModel.hasPendingChanges());
+      },
     });
   }
 );

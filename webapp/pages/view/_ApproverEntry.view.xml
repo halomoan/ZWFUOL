@@ -1,10 +1,9 @@
 <mvc:View
-	controllerName="zwfuol.pages.controller.InitiatorEntry"
+	controllerName="zwfuol.pages.controller.ApproverEntry"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:c="sap.ui.core"
 	xmlns:t="sap.ui.table"
-	xmlns:plugins="sap.ui.table.plugins"
 	xmlns:l="sap.ui.layout"
 	displayBlock="true"
 	height="100%"
@@ -12,45 +11,26 @@
 >
 	<l:VerticalLayout class="sapUiContentPadding">
 		<t:Table
-			id="initiatortbl"
+			id="approvertbl"
 			rows="{
-				path: 'tblData>/InitiatorGroup',
+				path: '/ApproverGroupSet',
 				sorter: {
 					path: 'Groupid'
-				},
-				filters : {
-					path : 'xStatus/isDeleted',
-					operator : 'EQ',
-					value1 : false
 				}
 			}"
 			selectionMode="MultiToggle"
-			visibleRowCount="7"
-			
-			ariaLabelledBy="title"			
+			visibleRowCount="18"
+			paste="onPaste"
+			ariaLabelledBy="title"
+			rowSelectionChange="onTableSelectionChanged"
 		>
-		<t:dependents>
-			<plugins:MultiSelectionPlugin
-				limit="{path: 'config>/limit', type: 'sap.ui.model.type.Integer'}"
-				enableNotification="true"
-				showHeaderSelector="{config>/showHeaderSelector}"
-				selectionMode="{config>/selectionMode}"
-				selectionChange="onSelectionChange"/>
-		</t:dependents>
-
 			<t:extension>
 				<OverflowToolbar style="Clear">
 					<Title
 						id="title"
-						text="{i18n>Label.RegisterInitiator}"
+						text="{i18n>Label.RegisterApprover}"
 					/>
-					<ToolbarSpacer />
-					<Button
-						icon="sap-icon://group"
-						textDirection="Inherit"
-						type="Default"
-						press="onManageGroup"
-					/>
+					<ToolbarSpacer />					
 					<Button
 						icon="sap-icon://save"
 						textDirection="Inherit"
@@ -75,72 +55,22 @@
 			</t:extension>
 			<t:columns>
 				<t:Column
-					width="16rem"
+					width="12rem"
 					filterProperty="Groupid"
 				>
 					<Label text="{i18n>Label.GroupID}" />
-					<t:template>
-						<Select
-							forceSelection="false"
-							selectedKey="{tblData>Groupid}"
-							items="{
-								path: '/InitGroupSet',
-								sorter: {
-									path: 'Groupid'
-								}
-							}"
-							change="onChanged"
-						>
-							<c:Item
-								key="{Groupid}"
-								text="{Groupname}"
-							/>
-						</Select>
-					</t:template>
-				</t:Column>
-				<t:Column
-					width="10rem"
-					filterProperty="Function"
-				>
-					<Label text="{i18n>Label.Property}" />
-					<t:template>
-						<Select
-							forceSelection="false"
-							selectedKey="{tblData>Function}"
-							items="{
-								path: '/ZFunctionSet',
-								sorter: {
-									path: 'Id'
-								}
-							}"
-							change="onChanged"
-						>
-							<c:Item
-								key="{Id}"
-								text="{Function}"
-							/>
-						</Select>
-					</t:template>
-				</t:Column>
-				<t:Column
-					width="14rem"
-					filterProperty="Department"
-				>
-					<Label text="{i18n>Label.Department}" />
-					<t:template>
+					<t:template>						
 						<Input
-							placeholder="{i18n>Select.Department}"
+							placeholder="{i18n>Select.ApproverGroup}"
 							showSuggestion="true"
-							suggestionItems="{
-								path: '/ZDepartmentSet',
-								suspended: true
-							}"
-							suggest=".onDepartmentInputSuggest"
-							value="{tblData>Department}"
-							change="onChanged"
+							suggestionItems="{/ApprGroupSet}"
+							value="{Groupid}"
 						>
 							<suggestionItems>
-								<c:ListItem text="{Id}" />
+								<c:ListItem
+									text="{Groupid}"
+									additionalText="{Groupname}"
+								/>
 							</suggestionItems>
 						</Input>
 					</t:template>
@@ -151,13 +81,20 @@
 				>
 					<Label text="{i18n>Label.UserID}" />
 					<t:template>
+						<!-- <Input
+							value="{
+								path: 'Useragent'
+							}"
+							maxLength="12"
+						/> -->
+
 						<Input
 							textFormatMode="ValueKey"
 							placeholder="{i18n>Select.UserID}"
 							showSuggestion="true"
 							showTableSuggestionValueHelp="false"
 							suggestionRows="{/UserVHSet}"
-							value="{tblData>Useragent}"
+							value="{Useragent}"
 							change="onChanged"
 						>
 							<suggestionColumns>
@@ -206,53 +143,33 @@
 									<Label text="{Department}" />
 								</ColumnListItem>
 							</suggestionRows>
-						</Input>
-						<!-- <Input
-							placeholder="{i18n>Select.InitiatorGroup}"
-							maxLength="12"
-							showSuggestion="true"
-							suggestionItems=""
-							value="{tblData>Useragent}"
-						>
-							<suggestionItems>
-								<c:ListItem
-									text="{Bname}"
-									additionalText="{Department}"
-								/>
-							</suggestionItems>
-						</Input> -->
+						</Input>				
 					</t:template>
 				</t:Column>
 				<t:Column width="10rem">
 					<Label text="{i18n>Label.ValidFrom}" />
 					<t:template>
 						<DatePicker value="{
-							path: 'tblData>Validfrom',
+							path: 'Validfrom',
 							type: 'sap.ui.model.type.Date',
 							formatOptions: {
 								pattern: 'yyyy-MM-dd'
 							}
-							
-						}"
-						change="onChanged"
-						/>
+						}" />
 					</t:template>
 				</t:Column>
 				<t:Column
-					width="10rem"
-					filterProperty="Areasize"
+					width="10rem"					
 				>
 					<Label text="{i18n>Label.ValidTo}" />
 					<t:template>
 						<DatePicker value="{
-							path: 'tblData>Validto',
+							path: 'Validto',
 							type: 'sap.ui.model.type.Date',
 							formatOptions: {
 								pattern: 'yyyy-MM-dd'
 							}
-						}" 
-						change="onChanged"
-						/>
+						}" />
 					</t:template>
 				</t:Column>
 			</t:columns>

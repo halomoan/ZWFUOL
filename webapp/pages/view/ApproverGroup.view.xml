@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="zwfuol.pages.controller.InitiatorGroup"
+	controllerName="zwfuol.pages.controller.ApproverGroup"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:c="sap.ui.core"
@@ -54,7 +54,7 @@
 							<f:FormElement label="{i18n>Label.GroupID}">
 								<f:fields>
 									<HBox>
-										<Label text="IG" class="sapUiTinyMarginTop sapUiTinyMarginEnd"/>
+										<Label text="AP" class="sapUiTinyMarginTop sapUiTinyMarginEnd"/>
 										<Input
 											value="{form>/Groupid}"
 											id="name"
@@ -82,9 +82,9 @@
 				</f:formContainers>
 			</f:Form>
 			<t:Table
-				id="initiatortbl"
+				id="Approvertbl"
 				rows="{
-					path: '/InitGroupSet',
+					path: '/ApprGroupSet',
 					sorter: {
 						path: 'Groupid'
 					}
@@ -106,7 +106,7 @@
 					<OverflowToolbar style="Clear">
 						<Title
 							id="title"
-							text="{i18n>Label.InitiatorGroup}"
+							text="{i18n>Label.ApproverGroup}"
 						/>
 						<ToolbarSpacer />
 						<Button
