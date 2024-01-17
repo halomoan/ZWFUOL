@@ -90,7 +90,7 @@ sap.ui.define(
 
         this._oRouter = this.getRouter();
         this._oRouter
-          .getRoute("RouteMainView")
+          .getRoute("ApproverEntry")
           .attachPatternMatched(this.__onRouteMatched, this);
       },
 

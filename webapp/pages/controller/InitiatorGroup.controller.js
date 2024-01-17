@@ -99,7 +99,7 @@ sap.ui.define(
         _oTableControl = this.byId("initiatortbl");
         this._oRouter = this.getRouter();
         this._oRouter
-          .getRoute("RouteMainView")
+          .getRoute("InitiatorGroup")
           .attachPatternMatched(this.__onRouteMatched, this);
       },
 

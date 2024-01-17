@@ -118,6 +118,11 @@
           "name": "ApproverEntry",
           "pattern": "ApproverEntry",
           "target": ["ApproverEntryView"]
+        },
+        {
+          "name": "WFRegister",
+          "pattern": "WFRegister",
+          "target": ["WFRegisterView"]
         }
       ],
       "targets": {
@@ -172,6 +177,13 @@
           "transition": "slide",
           "viewId": "ApproverEntry",
           "viewName": "ApproverEntry"
+        },
+        "WFRegisterView": {
+          "parent": "MasterDetail",
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "WFRegister",
+          "viewName": "WFRegister"
         }
       }
     },

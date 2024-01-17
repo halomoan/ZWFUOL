@@ -59,7 +59,7 @@
 				>
 					<tnt:NavigationListItem
 						id="_IDGenNavigationListItem1"
-						items="{SubMenus}"
+						items="{path:'SubMenus', templateShareable:true }"
 						text="{Name}"
 						icon="{Icon}"
 						expanded="false"

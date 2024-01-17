@@ -99,7 +99,7 @@ sap.ui.define(
         _oTableControl = this.byId("Approvertbl");
         this._oRouter = this.getRouter();
         this._oRouter
-          .getRoute("RouteMainView")
+          .getRoute("ApproverGroup")
           .attachPatternMatched(this.__onRouteMatched, this);
       },
 
