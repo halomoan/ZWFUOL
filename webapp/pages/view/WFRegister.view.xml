@@ -15,7 +15,7 @@
 			<t:Table
 				id="approvertbl"
 				rows="{
-					path: '/ApproverGroupSet'					
+					path: '/ZWFRegisterSet'					
 				}"
 				visibleRowCount="18"
 				ariaLabelledBy="title"
@@ -103,15 +103,14 @@
 					</t:template>
 				</t:Column>
                 <t:Column
-					width="10rem"
-					filterProperty="WfTablenm"
+					width="10rem"					
 				>
-					<Label text="{i18n>Label.TableName}" />
+					<Label text="{i18n>Label.NoOfApprover}" />
 					<t:template>						
 						<Input							
 							placeholder=""
 							showTableSuggestionValueHelp="false"							
-							value="{WfTablenm}"
+							value="{WfNofapprover}"
 							change="onChanged"
 						>							
 						</Input>				
