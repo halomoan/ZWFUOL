@@ -45,7 +45,10 @@ sap.ui.define([
                         break;
                     case "SAPG1:WFAPPRGRPASSG":
                         this._oRouter.navTo("ApproverEntry",_oParams);
-                        break;                   
+                        break;
+                    case "SAPG1:WFREGISTER":
+                        this._oRouter.navTo("WFRegister",_oParams);
+                        break;
                     default:
                         this._oRouter.navTo("NotFound");break;
                 }
