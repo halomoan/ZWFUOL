@@ -10,7 +10,7 @@
 	height="100%"
 	busyIndicatorDelay="0"
 >
-	<Page>
+	<Page showHeader="false">
 		<l:VerticalLayout class="sapUiContentPadding">
 			<t:Table
 				id="approvertbl"

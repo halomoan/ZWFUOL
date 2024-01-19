@@ -13,7 +13,7 @@
 <Page showHeader="false">
 		<l:VerticalLayout class="sapUiContentPadding">
 			<t:Table
-				id="approvertbl"
+				id="wfregister"
 				rows="{
 					path: '/ZWFRegisterSet'					
 				}"
@@ -73,10 +73,10 @@
 					</t:template>
 				</t:Column>
 				<t:Column
-					width="10rem"
+					width="30rem"
 					filterProperty="WfDesc"
 				>
-					<Label text="{i18n>Label.WFDesc}" />
+					<Label text="{i18n>Label.Description}" />
 					<t:template>						
 						<Input							
 							placeholder="{i18n>Enter.WorkflowDesc}"							
@@ -91,12 +91,12 @@
 					width="10rem"
 					filterProperty="WfNofapprover"
 				>
-					<Label text="{i18n>Label.WFDesc}" />
+					<Label text="{i18n>Label.WFNoofapprover}" />
 					<t:template>						
 						<Input							
 							placeholder=""
 							showTableSuggestionValueHelp="false"							
-							value="{WfNofapprover}"
+							value="{path: 'WfNofapprover',type: 'sap.ui.model.type.Integer'}"
 							change="onChanged"
 						>							
 						</Input>				
@@ -105,12 +105,12 @@
                 <t:Column
 					width="10rem"					
 				>
-					<Label text="{i18n>Label.NoOfApprover}" />
+					<Label text="{i18n>Label.TableName}" />
 					<t:template>						
 						<Input							
 							placeholder=""
 							showTableSuggestionValueHelp="false"							
-							value="{WfNofapprover}"
+							value="{WfTablenm}"
 							change="onChanged"
 						>							
 						</Input>				

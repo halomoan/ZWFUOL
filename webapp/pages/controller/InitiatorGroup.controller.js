@@ -88,11 +88,11 @@ sap.ui.define(
         this.byId("messagePopoverBtn").addDependent(_oMessagePopover);
 
         this._oMessageManager = sap.ui.getCore().getMessageManager();
-        this._oMessageProcessor =
-          new sap.ui.core.message.ControlMessageProcessor();
-        this._oMessageManager.registerMessageProcessor(this._oMessageProcessor);
+        //this._oMessageProcessor =
+        //  new sap.ui.core.message.ControlMessageProcessor();
+        //this._oMessageManager.registerMessageProcessor(this._oMessageProcessor);
 
-        this._oMessageManager.registerObject(oView, true);
+        //this._oMessageManager.registerObject(oView, true);
 
         oView.setModel(this._oMessageManager.getMessageModel(), "message");
 
@@ -106,6 +106,7 @@ sap.ui.define(
       __onRouteMatched: function (oEvent) {
         _oi18Bundle = this.getResourceBundle();
         _oParams = oEvent.getParameter("arguments");
+        this._oMessageManager.removeAllMessages();
       },
 
       onClear: function () {

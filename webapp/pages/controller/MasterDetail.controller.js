@@ -1,7 +1,7 @@
 sap.ui.define([    
     "zwfuol/controller/BaseController",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",    
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
