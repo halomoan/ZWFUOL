@@ -228,7 +228,7 @@ sap.ui.define(
 
           oSAPModel.remove(sPath, {
             success: function (oData, oResponse) {
-              console.log(useBatch);
+              
 
             },
             error: function (oError) {            

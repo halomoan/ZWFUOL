@@ -11,7 +11,7 @@
 	height="100%"
 	busyIndicatorDelay="0"	
 >
-	<Page>
+	<Page showHeader="false">
 		<l:VerticalLayout class="sapUiContentPadding">
 			<f:Form
 				id="FormChange354"
@@ -53,17 +53,17 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>Label.GroupID}">
 								<f:fields>
-									<HBox>
-										<Label text="IG" class="sapUiTinyMarginTop sapUiTinyMarginEnd"/>
+									
+										
 										<Input
 											value="{form>/Groupid}"
 											id="name"
-											maxLength="14"
+											maxLength="16"
 											valueState="{form>/Status/Groupid}"
 											valueStateText="{form>/StatusTxt/Groupid}"
 											width="10rem"
 										/>
-									</HBox>
+									
 								</f:fields>
 							</f:FormElement>
 							<f:FormElement label="{i18n>Label.GroupName}">
