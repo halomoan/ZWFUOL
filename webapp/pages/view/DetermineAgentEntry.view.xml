@@ -62,114 +62,27 @@
                 width="12rem"
                 filterProperty="Groupid"
             >
-                <Label text="{i18n>Label.GroupID}" />
+                <Label text="{i18n>Label.RuleOrder}" />
                 <t:template>						
-                    <Input
-                        placeholder="{i18n>Select.ApproverGroup}"
-                        showSuggestion="true"
-                        suggestionItems="{path:'/ApprGroupSet',templateShareable:true}"
-                        value="{Groupid}"
-                        change="onChanged"
-                    >
-                        <suggestionItems>
-                            <c:ListItem
-                                text="{Groupid}"
-                                additionalText="{Groupname}"
-                            />
-                        </suggestionItems>
-                    </Input>
+                    <Select
+								forceSelection="true"
+								selectedKey="{Ruleorder}"
+								items="{
+									path: 'viewData>/RuleOrderSet',
+									sorter: {
+										path: 'Id'
+									},
+									templateShareable: true
+								}"
+								change="onChanged"
+							>
+								<c:Item
+									key="{Id}"
+									text="{Id}"
+								/>
+							</Select>
                 </t:template>
-            </t:Column>
-            <t:Column
-                width="10rem"
-                filterProperty="Useragent"
-            >
-                <Label text="{i18n>Label.UserID}" />
-                <t:template>						
-                    <Input
-                        textFormatMode="ValueKey"
-                        placeholder="{i18n>Select.UserID}"
-                        showSuggestion="true"
-                        showTableSuggestionValueHelp="false"
-                        suggestionRows="{path:'/UserVHSet',templateShareable:true}"
-                        value="{Useragent}"
-                        change="onChanged"
-                    >
-                        <suggestionColumns>
-                            <Column
-                                popinDisplay="Inline"
-                                demandPopin="true"
-                            >
-                                <Label text="{i18n>Label.UserID}" />
-                            </Column>
-                            <Column
-                                hAlign="Center"
-                                popinDisplay="Inline"
-                                demandPopin="true"
-                                minScreenWidth="Tablet"
-                            >
-                                <Label text="{i18n>Label.FirstName}" />
-                            </Column>
-                            <Column
-                                hAlign="Center"
-                                popinDisplay="Inline"
-                                minScreenWidth="Tablet"
-                            >
-                                <Label text="{i18n>Label.LastName}" />
-                            </Column>
-                            <Column
-                                hAlign="Center"
-                                popinDisplay="Inline"
-                                demandPopin="true"
-                            >
-                                <Label text="{i18n>Label.Property}" />
-                            </Column>
-                            <Column
-                                hAlign="Center"
-                                popinDisplay="Inline"
-                                demandPopin="true"
-                            >
-                                <Label text="{i18n>Label.Department}" />
-                            </Column>
-                        </suggestionColumns>
-                        <suggestionRows>
-                            <ColumnListItem>
-                                <Label text="{Bname}" />
-                                <Label text="{Fistname}" />
-                                <Label text="{Lastname}" />
-                                <Label text="{Function}" />
-                                <Label text="{Department}" />
-                            </ColumnListItem>
-                        </suggestionRows>
-                    </Input>				
-                </t:template>
-            </t:Column>
-            <t:Column width="10rem">
-                <Label text="{i18n>Label.ValidFrom}" />
-                <t:template>
-                    <DatePicker value="{
-                        path: 'Validfrom',
-                        type: 'sap.ui.model.type.Date',
-                        formatOptions: {
-                            pattern: 'yyyy-MM-dd'
-                        }
-                    }" />
-                </t:template>
-            </t:Column>
-            <t:Column
-                width="10rem"					
-            >
-                <Label text="{i18n>Label.ValidTo}" />
-                <t:template>
-                    <DatePicker value="{
-                        path: 'Validto',
-                        type: 'sap.ui.model.type.Date',
-                        formatOptions: {
-                            pattern: 'yyyy-MM-dd'
-                        }
-                    }" />
-                </t:template>
-            </t:Column>
+            </t:Column>           
             </t:columns>
         </t:Table>
     </l:VerticalLayout>
