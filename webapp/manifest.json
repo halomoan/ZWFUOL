@@ -97,7 +97,7 @@
         {
           "name": "RouteMainView",
           "pattern": ":?query:",
-          "target": ["DetermineAgentEntryView"]
+          "target": ["DetermineAgentView"]
         },
         {
           "name": "InitiatorGroup",
@@ -125,9 +125,9 @@
           "target": ["WFRegisterView"]
         },
         {
-          "name": "DetermineAgentEntry",
-          "pattern": "DetermineAgentEntry",
-          "target": ["DetermineAgentEntryView"]
+          "name": "DetermineAgent",
+          "pattern": "DetermineAgent",
+          "target": ["DetermineAgentView"]
         }
       ],
       "targets": {
@@ -190,12 +190,12 @@
           "viewId": "WFRegister",
           "viewName": "WFRegister"
         },
-        "DetermineAgentEntryView": {
+        "DetermineAgentView": {
           "parent": "MasterDetail",
           "viewType": "XML",
           "transition": "slide",
-          "viewId": "DetermineAgentEntry",
-          "viewName": "DetermineAgentEntry"
+          "viewId": "DetermineAgent",
+          "viewName": "DetermineAgent"
         }
 
       }
