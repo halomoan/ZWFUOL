@@ -49,10 +49,9 @@ sap.ui.define([
                     case "SAPG1:WFREGISTER":
                         this._oRouter.navTo("WFRegister",_oParams);
                         break;
-                    case "SAPG1:DETERMINEAGENT":
+                    case "SAPG1:WFAPPRASSIGN":
                             this._oRouter.navTo("DetermineAgent",_oParams);
-                            break;
-
+                            break;                   
                     default:
                         this._oRouter.navTo("NotFound");break;
                 }

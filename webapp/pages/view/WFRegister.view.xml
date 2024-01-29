@@ -86,22 +86,7 @@
 						>							
 						</Input>				
 					</t:template>
-				</t:Column>
-				<t:Column
-					width="10rem"
-					filterProperty="WfNofapprover"
-				>
-					<Label text="{i18n>Label.WFNoofapprover}" />
-					<t:template>						
-						<Input							
-							placeholder=""
-							showTableSuggestionValueHelp="false"							
-							value="{path: 'WfNofapprover',type: 'sap.ui.model.type.Integer'}"
-							change="onChanged"
-						>							
-						</Input>				
-					</t:template>
-				</t:Column>
+				</t:Column>			
                 <t:Column
 					width="10rem"					
 				>

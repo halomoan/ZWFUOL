@@ -41,18 +41,9 @@ sap.ui.define(
           showSave: false,
           showDelete: false,
           WfGuid: "",
-          WfName: "",
-          RuleOrderSet: [],
+          WfName: "",         
         });
 
-        var aRuleOrder = [];
-
-        for (var i = 0; i < 30; i++) {
-          var idx = "" + i;
-          aRuleOrder.push({Id: idx.padStart(3, "0")});
-        }
-        
-        oViewModel.setProperty("/RuleOrderSet", aRuleOrder);
         var oView = this.getView();
         oView.setModel(oViewModel, "viewData");
 
@@ -84,11 +75,7 @@ sap.ui.define(
         this.byId("messagePopoverBtn").addDependent(_oMessagePopover);
 
         this._oMessageManager = sap.ui.getCore().getMessageManager();
-        //this._oMessageProcessor =
-        //  new sap.ui.core.message.ControlMessageProcessor();
-        //this._oMessageManager.registerMessageProcessor(this._oMessageProcessor);
 
-        //this._oMessageManager.registerObject(oView, true);
         oView.setModel(this._oMessageManager.getMessageModel(), "message");
         _oTableControl = this.byId("detagenttbl");
 
@@ -104,14 +91,13 @@ sap.ui.define(
       },
       onAdd: function () {
         var oData = {
-          WfGuid: "",
-          Ruleorder: "000",
+          WfGuid: "",          
+          Initiatorgrp: "",
           Validfrom: new Date(),
           Validto: new Date("9999-12-31"),
           Opt: "",
           Value1: "0.00",
-          Value2: "0.00",
-          Initiatorgrp: "",
+          Value2: "0.00",         
           L1approvergrp: "",
           L2approvergrp: "",
           L3approvergrp: "",
@@ -143,6 +129,31 @@ sap.ui.define(
         }
       },
 
+      onSave: function () {
+        var oThis = this;
+        this._oMessageManager.removeAllMessages();
+
+        var oSAPModel = this.getView().getModel();
+        //oSAPModel.setDeferredGroups(["groupBatchId"]);
+
+        console.log(oSAPModel.hasPendingChanges());
+
+        if (oSAPModel.hasPendingChanges()) {
+          oSAPModel.submitChanges({
+            success: function (oData, oResponse) {
+              MessageToast.show(_oi18Bundle.getText("Success.Saved", ["Data"]));
+              oThis._dirtyShowSave();
+            },
+            error: function (oError) {
+              //console.log(oError);
+            },
+            //groupId: "groupBatchId"
+          });
+        } else {
+          oThis._dirtyShowSave();
+        }
+      },
+
       onWFSelect: function (oEvent) {
         var aParams = oEvent.getParameters();
         var sKey = aParams.selectedItem.getKey();
@@ -150,8 +161,7 @@ sap.ui.define(
 
         var oView = this.getView();
         var oModel = oView.getModel("viewData");
-        
-        console.log(sText);
+                
 
         var oFilter = new Filter([new Filter("WfGuid", FilterOperator.EQ, sKey),], true);;
 
@@ -161,6 +171,46 @@ sap.ui.define(
       },
       onMessagePopoverPress: function (oEvent) {
         _oMessagePopover.toggle(oEvent.getSource());
+      },
+
+      onChanged: function (oEvent) {
+        var oSource = oEvent.getSource();
+
+        var sCtrlType = oSource.getMetadata().getName();
+
+        var aParams = oEvent.getParameters();
+
+        var sValue = aParams.newValue;
+        if (!sValue) {
+          sValue = aParams.selectedItem.getKey();
+        }
+
+        var oSAPModel = oSource.getBindingContext().getModel();
+
+        var sPath = oSource.getBindingContext().getPath();
+        if (oSource.getBinding("selectedKey")) {
+          var sSubPath = oSource.getBinding("selectedKey").getPath();
+        } else {
+          sSubPath = oSource.getBinding("value").getPath();
+        }
+
+        sSubPath = sPath + "/" + sSubPath;
+
+        if (sCtrlType === "sap.m.DatePicker") {
+          oSAPModel.setProperty(sSubPath, new Date(sValue));
+        } else {
+          oSAPModel.setProperty(sSubPath, sValue);
+        }
+        this._dirtyShowSave();
+      },
+
+      _dirtyShowSave: function () {
+        var oViewModel = this.getView().getModel("viewData");
+        var oSAPModel = this.getView().getModel();
+        var bChanged = oSAPModel.hasPendingChanges();
+        if (bChanged)
+          oViewModel.setProperty("/showSave", oSAPModel.hasPendingChanges());
+        else oViewModel.setProperty("/showSave", oSAPModel.hasPendingChanges());
       },
     });
   }

@@ -97,7 +97,7 @@
         {
           "name": "RouteMainView",
           "pattern": ":?query:",
-          "target": ["DetermineAgentView"]
+          "target": ["InitiatorGroupView"]
         },
         {
           "name": "InitiatorGroup",
