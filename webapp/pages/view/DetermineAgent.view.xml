@@ -130,6 +130,9 @@
 									sorter: {
 										path: 'Groupid'
 									},
+									parameters: {
+										custom: { forSelect: true }
+									},
 									templateShareable: true
 								}"
 								change="onChanged"
@@ -183,6 +186,9 @@
 									path: '/ApprGroupSet',
 									sorter: {
 										path: 'Groupid'
+									},									
+									parameters: {
+										custom: { forSelect: true }
 									},
 									templateShareable: true
 								}"
@@ -208,6 +214,9 @@
 									path: '/ApprGroupSet',
 									sorter: {
 										path: 'Groupid'
+									},									
+									parameters: {
+										custom: { forSelect: true }
 									},
 									templateShareable: true
 								}"
@@ -233,6 +242,9 @@
 									path: '/ApprGroupSet',
 									sorter: {
 										path: 'Groupid'
+									},
+									parameters: {
+										custom: { forSelect: true }
 									},
 									templateShareable: true
 								}"

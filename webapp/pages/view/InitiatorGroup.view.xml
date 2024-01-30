@@ -87,7 +87,7 @@
 					path: '/InitGroupSet',
 					sorter: {
 						path: 'Groupid'
-					}
+					}					
 				}"
 				visibleRowCount="16"
 				paste="onPaste"

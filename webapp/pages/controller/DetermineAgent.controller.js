@@ -136,8 +136,6 @@ sap.ui.define(
         var oSAPModel = this.getView().getModel();
         //oSAPModel.setDeferredGroups(["groupBatchId"]);
 
-        console.log(oSAPModel.hasPendingChanges());
-
         if (oSAPModel.hasPendingChanges()) {
           oSAPModel.submitChanges({
             success: function (oData, oResponse) {

@@ -102,7 +102,7 @@ sap.ui.define(
       onAdd: function () {
         var oData = {
           Groupid: "",
-          Useragent: "",          
+          Useragent: "",
           Validfrom: new Date(),
           Validto: new Date("9999-12-31"),
         };
@@ -118,7 +118,8 @@ sap.ui.define(
         if (oSAPModel.hasPendingChanges()) {
           oSAPModel.submitChanges({
             success: function (oResponse) {},
-            error: function (oError) {},
+            error: function (oError) {              
+            },
             groupId: "groupBatchId",
           });
         }
@@ -126,6 +127,7 @@ sap.ui.define(
 
       onSave: function () {
         var oThis = this;
+        
         this._oMessageManager.removeAllMessages();
 
         var oSAPModel = this.getView().getModel();
