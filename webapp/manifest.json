@@ -73,7 +73,11 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultBindingMode": "OneWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": true
+        }
       }
     },
     "resources": {
