@@ -11,6 +11,9 @@
 		cancel=".onDepartmentDialogClose"
 		items="{
 			path: '/ZDepartmentSet',
+			parameters: {
+				custom: { forSelect: true }
+			},
 			templateShareable:true
 		}">
 		<StandardListItem

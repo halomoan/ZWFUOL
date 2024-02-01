@@ -102,6 +102,8 @@ sap.ui.define(
       onAdd: function () {
         var oData = {
           Groupid: "",
+          Function:"",
+          Department: "",
           Useragent: "",
           Validfrom: new Date(),
           Validto: new Date("9999-12-31"),
@@ -129,8 +131,10 @@ sap.ui.define(
         var oThis = this;
         
         this._oMessageManager.removeAllMessages();
+        
 
         var oSAPModel = this.getView().getModel();
+
         //oSAPModel.setDeferredGroups(["groupBatchId"]);
 
         //console.log(oSAPModel.hasPendingChanges());
@@ -138,7 +142,7 @@ sap.ui.define(
         if (oSAPModel.hasPendingChanges()) {
           oSAPModel.submitChanges({
             success: function (oData, oResponse) {
-              MessageToast.show(_oi18Bundle.getText("Success.Saved", ["Data"]));
+              //MessageToast.show(_oi18Bundle.getText("Success.Saved", ["Data"]));
               oThis._dirtyShowSave();
             },
             error: function (oError) {

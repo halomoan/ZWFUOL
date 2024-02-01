@@ -81,6 +81,51 @@
 					</t:template>
 				</t:Column>
 				<t:Column
+						width="10rem"
+						filterProperty="Function"
+					>
+						<Label text="{i18n>Label.Property}"/>
+						<t:template>
+							<Select
+								forceSelection="false"
+								selectedKey="{Function}"
+								items="{
+									path: '/ZFunctionSet',
+									sorter: {
+										path: 'Id'
+									},
+									parameters: {
+										custom: { forSelect: true }
+									},
+									templateShareable: true
+								}"
+								change="onChanged"
+							>
+								<c:Item
+									key="{Id}"
+									text="{Function}"
+								/>
+							</Select>
+						</t:template>
+					</t:Column>
+					<t:Column
+						width="14rem"
+						filterProperty="Department"
+					>
+						<Label text="{i18n>Label.Department}"/>
+						<t:template>
+							<Input
+								type="Text"
+								value="{Department}"
+								placeholder=""
+								showValueHelp="true"
+								valueHelpOnly="true"
+								valueHelpRequest=".onVHDepartment"
+								change="onChanged"
+							/>
+						</t:template>
+					</t:Column>
+				<t:Column
 					width="10rem"
 					filterProperty="Useragent"
 				>
