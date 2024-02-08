@@ -95,8 +95,7 @@ sap.ui.define(
         var oData = {
           WfGuid: "",
           WfName: "",
-          WfDesc: "",
-          WfNofapprover: 3,
+          WfDesc: "",          
           WfTablenm: "",
           WfTotalfield: "",
         };

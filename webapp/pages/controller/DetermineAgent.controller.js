@@ -177,10 +177,13 @@ sap.ui.define(
         var sCtrlType = oSource.getMetadata().getName();
 
         var aParams = oEvent.getParameters();
-
-        var sValue = aParams.newValue;
+        
+        var sValue = aParams.newValue;        
         if (!sValue) {
-          sValue = aParams.selectedItem.getKey();
+          if (aParams.selectedItem)
+            sValue = aParams.selectedItem.getKey();
+          else 
+            sValue = '';
         }
 
         var oSAPModel = oSource.getBindingContext().getModel();
